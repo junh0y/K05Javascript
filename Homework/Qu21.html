@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qu21.html</title>
+    <script>
+        function changeImg(imgName) {
+            var img = document.getElementById('fruitImg');
+            img.src = '../Images/'+imgName+'.png';
+        }
+    </script>
+</head>
+<body>
+    <h2>라디오 버튼을 클릭하면 이미지를 출력합니다.</h2>
+    <hr>
+    <!-- 
+        label 태그를 이용하여 텍스트 클릭으로 선택하기
+        방법 1. input의 id 속성값과 label의 for 속성값을 매칭한다.
+        방법 2. input과 텍스트 전체를 label 태그로 감싼다.
+     -->
+    <label>
+    <input type="radio" name="fruit" value="banana" onclick="changeImg(this.value);" checked> 바나나
+    </label>
+    <label>
+    <input type="radio" name="fruit" value="mango" onclick="changeImg(this.value);"> 망고
+    </label>
+    <input type="radio" name="fruit" id="apple" onclick="changeImg('apple');">
+    <label for="apple">사과</label>
+    <br><br>
+    <!-- 
+        this를 통해 해당 HTML 태그를 선택할 수 있고 value 속성을 통해 입력된 값을 선택할 수 있다.
+        즉, this.value는 해당 DOM 객체가 가진 value 값을 가리킨다.
+    -->
+    <img src="../Images/banana.png" id="fruitImg">
+</body>
+</html>

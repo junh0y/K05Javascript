@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J17CssControl.html</title>
+    <style>
+        body {
+            font-family: '맑은고딕';
+        }
+    </style>
+
+    <script>
+        //  전역변수 : 기사 부분의 DOM 객체와 폰트 사이즈 저장
+        var pTag, pSize;
+
+        window.onload = function() {
+            //  기사가 있는 p 태그의 DOM을 얻어온다.
+            pTag = document.getElementById('article');
+            //  현재 설정된 폰트 사이즈를 얻어온다. (별도의 사이즈 지정이 없다면 16px)
+            pSize = parseInt(pTag.style.fontSize);
+        }
+
+        function fnArticle(flag) {
+            /*
+                JS에서 CSS 속성 컨트롤
+                : DOM.style.CSS속성 = '속성값';
+                  단, 이때 CSS 속성에 하이픈이 들어갔다면 제거 후 첫글자를 대문자로 기술한다.
+                  또한, 크기를 설정할때는 반드시 px와 같은 단위를 기술해야한다.
+            */
+            switch(flag) {
+                case '+':       //  폰트 크기 설정
+                    pSize += 10;
+                    pTag.style.fontSize = pSize+'px';
+                    break;
+                case '-':
+                    pSize -= 10;
+                    pTag.style.fontSize = pSize+'px';
+                    break;
+                case 'R':       //  폰트 색상 설정
+                    pTag.style.color = 'red';
+                    break;
+                case 'G':
+                    pTag.style.color = 'green';
+                    break;
+                case 'B':
+                    pTag.style.color = 'blue';
+                    break;
+                case 'Bo':      //  폰트 굵기 설정
+                    pTag.style.fontWeight = 'bold';
+                    break;
+                case 'No':
+                    pTag.style.fontWeight = 'normal';
+                    break;
+                case 'Ce':      //  정렬 설정
+                    pTag.style.textAlign = 'center';
+                    break;
+                case 'Le':
+                    pTag.style.textAlign = 'left';
+                    break;
+                case 'B_red':   //  배경 색상 설정
+                    pTag.style.backgroundColor = 'red';
+                    break;
+                case 'B_silver':
+                    pTag.style.backgroundColor = 'silver';
+                    break;
+                case 'B_white':
+                    pTag.style.backgroundColor = 'white';
+                    break;
+                default :
+                    pTag.style.color = 'black'
+            }
+        }
+        /*
+            ■ 연습문제
+            글꼴바꾸기 버튼을 계속 누를때마다 아래 5가지 폰트가 토글되어 적용될 수 있도록 함수를
+            정의하시오.
+            글꼴 : Verdana, 굴림체, 휴면옛체, 궁서, Impact
+        */
+        var fontCount = 0;  //  폰트 토글을 위한 전역변수
+        function setFont() {
+            //  문제에서 주어진 폰트를 배열로 선언
+            var fontToggle = ['Verdana', '굴림체', '휴먼옛체', '궁서', 'Impact'];
+            //  정수를 5로 나누면 나머지는 0~4까지 생성
+            var idx = fontCount % 5;
+            //  스타일 지정
+            pTag.style.fontFamily = fontToggle[idx];
+            //  함수를 호출할때마다 전역변수 증가
+            fontCount++;
+       }
+    </script>
+</head>
+<body>
+    <h2>Javascript로 CSS 제어하기</h2>
+    <input type="button" value="글꼴바꾸기" onclick="setFont();">
+    <fieldset>
+        <legend>신문기사</legend>
+        <button onclick="fnArticle('+')">+</button>
+        <button onclick="fnArticle('-')">-</button>
+        <button onclick="fnArticle('R')">Red</button>
+        <button onclick="fnArticle('G')">Green</button>
+        <button onclick="fnArticle('B')">Blue</button>
+        <button onclick="fnArticle('')">Black</button>
+        <button onclick="fnArticle('Bo')">볼드체</button>
+        <button onclick="fnArticle('No')">보통체</button>
+        <button onclick="fnArticle('Ce')">가운데정렬</button>
+        <button onclick="fnArticle('Le')">좌측정렬</button>
+        <button onclick="fnArticle('B_red')">배경색(RED)</button>
+        <button onclick="fnArticle('B_silver')">배경색(SILVER)</button>
+        <button onclick="fnArticle('B_white')">배경색(WHITE)</button>
+    </fieldset>
+    <p id="article" style="font-size: 12px;">
+        오늘의 뉴스<br>
+        조 바이든 미국 대통령이 16일 "미국은 '하나의 중국' 정책을 장기적으로 일관되게 시행해왔고 대만독립을 지지하지 않는다"고 밝혔다.
+        중국 관영 중앙TV(CCTV)에 따르면 바이든 대통령은 이날 시진핑(習近平) 중국 국가주석과의 화상 정상회담에서 이같이 말하고 "대만해협과 지역의 평화와 안정 유지를 희망한다"고 강조했다.
+        바이든 대통령은 "미국은 중국의 체제 전환을 추구하지 않으며, 동맹 관계 강화를 통해 중국을 반대하는 것을 추구하지 않으며, 중국과 충돌할 생각이 없다는 점을 분명히 한다"고 밝혔다.
+        시 주석은 "새로운 시기에 중미는 공존을 위한 세 가지 원칙을 견지해야 한다"며 "첫번째는 상호 존중, 두번째는 평화 공존, 세번째는 협력 및 윈윈(상생)"이라고 말했다.
+        이어 "지구는 중미가 함께 발전할 수 있을 만큼 충분히 크다"며 "제로섬 게임을 하지 말자"고 강조했다.
+        시 주석은 "중국과 미국은 바다에서 항행하는 거선 2대"라며 "풍랑 속에 같이 나아가기 위해 양국은 키를 꼭 잡고 항로 이탈이나 실속(속도 상실), 충돌이 없도록 노력해야 한다"고 덧붙였다다.
+    </p>
+</body>
+</html>
